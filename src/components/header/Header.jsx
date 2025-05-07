@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { GoSearch } from "react-icons/go";
 import siteLogo from '../../assets/logo.png';
-// import { RiMenu3Fill } from "react-icons/ri";
 import { NavLink } from 'react-router-dom';
 import { TfiMenuAlt } from "react-icons/tfi";
+// eslint-disable-next-line no-unused-vars
+import { motion, AnimatePresence } from 'framer-motion';
 
 const carOptions = [
   'Benz C-Class',
@@ -66,16 +67,6 @@ const Header = () => {
               >
                 {item.label}
               </NavLink>
-              {/* <NavLink
-                to={item.path}
-                className={({ isActive }) =>
-                  isActive
-                    ? 'relative text-white font-bold after:content-[""] after:absolute after:-bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-[70%] after:border-b-2 after:border-grey-600'
-                    : 'text-white hover:text-grey-400'
-                }
-              >
-                {item.label}
-              </NavLink> */}
             </li>
           ))}
         </ul>
@@ -113,26 +104,35 @@ const Header = () => {
           </div>
         </div>
       </div>
-      {/* Mobile Dropdown Menu */}
-      {isMenuOpen && (
-        <ul className='lg:hidden absolute top-16 left-0 right-0 bg-gray-400 text-white font-semibold text-center space-y-2 py-4 shadow-md rounded-b-md z-50'>
-          <li className='hover:bg-gray-700 py-2'>
-            <Link to="/" onClick={() => setIsMenuOpen(false)}>HOME</Link>
-          </li>
-          <li className='hover:bg-gray-700 py-2'>
-            <Link to="/about" onClick={() => setIsMenuOpen(false)}>ABOUT</Link>
-          </li>
-          <li className='hover:bg-gray-700 py-2'>
-            <Link to="/blog" onClick={() => setIsMenuOpen(false)}>ENQUIRES</Link>
-          </li>
-          <li className='hover:bg-gray-700 py-2'>
-            <Link to="/cars" onClick={() => setIsMenuOpen(false)}>CARS</Link>
-          </li>
-          <li className='hover:bg-gray-700 py-2'>
-            <Link to="/contact" onClick={() => setIsMenuOpen(false)}>CONTACT</Link>
-          </li>
-        </ul>
-      )}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.ul
+            initial={{ x: '-100%', opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: '-100%', opacity: 0 }}
+            transition={{ duration: 0.4, ease: 'easeInOut' }}
+            className='lg:hidden absolute top-24 left-0 bg-gray-400 text-white font-semibold text-center space-y-2 py-4 shadow-md rounded-r-md z-50 w-[80%] h-auto'
+          >
+            <li className='hover:bg-gray-700 py-2'>
+              <Link to="/" onClick={() => setIsMenuOpen(false)}>HOME</Link>
+            </li>
+            <li className='hover:bg-gray-700 py-2'>
+              <Link to="/about" onClick={() => setIsMenuOpen(false)}>ABOUT</Link>
+            </li>
+            <li className='hover:bg-gray-700 py-2'>
+              <Link to="/blog" onClick={() => setIsMenuOpen(false)}>ENQUIRES</Link>
+            </li>
+            <li className='hover:bg-gray-700 py-2'>
+              <Link to="/cars" onClick={() => setIsMenuOpen(false)}>CARS</Link>
+            </li>
+            <li className='hover:bg-gray-700 py-2'>
+              <Link to="/contact" onClick={() => setIsMenuOpen(false)}>CONTACT</Link>
+            </li>
+          </motion.ul>
+        )}
+      </AnimatePresence>
+
+
     </div>
   );
 };
