@@ -29,14 +29,14 @@ const letter = {
 
 const Home = () => {
   return (
-    <div>
+    <>
       <div className="relative h-screen bg-white overflow-hidden">
         <div className="absolute top-0 right-0 w-full h-full bg-gray-800 lg:bg-red-500 z-0"
           style={{ clipPath: 'polygon(40% 0, 100% 0, 100% 100%, 60% 100%)' }}>
         </div>
         <div className="relative z-10 p-10 md:p-20 max-w-3xl">
           <motion.h1
-            className="text-4xl md:text-5xl font-bold text-black leading-tight flex flex-wrap"
+            className="text-3xl md:text-5xl font-bold text-black leading-tight flex flex-wrap"
             variants={container}
             initial="hidden"
             animate="show"
@@ -59,7 +59,7 @@ const Home = () => {
           </button>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 
