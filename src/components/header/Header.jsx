@@ -102,28 +102,26 @@ const Header = () => {
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: '-100%', opacity: 0 }}
             transition={{ duration: 0.4, ease: 'easeInOut' }}
-            className='lg:hidden absolute top-24 left-0 bg-gray-400 text-white font-semibold text-center space-y-2 py-4 shadow-md rounded-r-md z-50 w-[90%] h-auto'
+            className='lg:hidden absolute top-24 left-0 bg-white text-black font-semibold text-center space-y-2 py-4 shadow-md rounded-r-md z-50 w-[90%] h-auto'
           >
-            <li className='hover:bg-gray-700 py-4'>
+            <li className='hover:black-100 py-4'>
               <Link to="/" onClick={() => setIsMenuOpen(false)}>HOME</Link>
             </li>
-            <li className='hover:bg-gray-700 py-4'>
+            <li className='hover:black-100 py-4'>
               <Link to="/about" onClick={() => setIsMenuOpen(false)}>ABOUT</Link>
             </li>
-            <li className='hover:bg-gray-700 py-4'>
+            <li className='hover:black-100 py-4'>
               <Link to="/blog" onClick={() => setIsMenuOpen(false)}>ENQUIRES</Link>
             </li>
-            <li className='hover:bg-gray-700 py-4'>
+            <li className='hover:black-100 py-4'>
               <Link to="/cars" onClick={() => setIsMenuOpen(false)}>CARS</Link>
             </li>
-            <li className='hover:bg-gray-700 py-4'>
+            <li className='hover:black-100 py-4'>
               <Link to="/contact" onClick={() => setIsMenuOpen(false)}>CONTACT</Link>
             </li>
           </motion.ul>
         )}
       </AnimatePresence>
-
-
     </div>
   );
 };

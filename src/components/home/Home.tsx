@@ -1,67 +1,56 @@
-import React from 'react'
-import { motion } from 'framer-motion'
+import React from 'react';
+import { motion } from 'framer-motion';
 
-const text = 'FIRSTLINEALIGHT'.split('')
-
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
+const containerVariants = {
+  animate: {
     transition: {
-      staggerChildren: 0.07,
-      delayChildren: 0.3
-    }
-  }
-}
+      staggerChildren: 0.3,
+    },
+  },
+};
 
-const letter = {
-  hidden: { y: 40, opacity: 0 },
-  show: {
+const spanVariants = {
+  initial: { y: 80, opacity: 0 }, // Start lower
+  animate: {
     y: 0,
     opacity: 1,
     transition: {
-      type: 'spring',
-      damping: 12,
-      stiffness: 100
-    }
-  }
-}
+      duration: 0.6,
+      ease: 'easeOut',
+    },
+  },
+};
 
 const Home = () => {
   return (
-    <>
-      <div className="relative h-screen bg-white overflow-hidden">
-        <div className="absolute top-0 right-0 w-full h-full bg-gray-800 lg:bg-red-500 z-0"
-          style={{ clipPath: 'polygon(40% 0, 100% 0, 100% 100%, 60% 100%)' }}>
-        </div>
-        <div className="relative z-10 p-10 md:p-20 max-w-3xl">
-          <motion.h1
-            className="text-3xl md:text-5xl font-bold text-black leading-tight flex flex-wrap"
-            variants={container}
-            initial="hidden"
-            animate="show"
-          >
-            {text.map((char, i) => (
-              <motion.span
-                key={i}
-                variants={letter}
-                className={`${i < 5 ? 'text-red-600' : 'text-black'}`}
-              >
-                {char}
-              </motion.span>
-            ))}
-          </motion.h1>
-          <p className="mt-4 text-gray-600">
-            We have every car you need, from the latest models to timeless classics, ready for rent. Whether it’s for a weekend getaway or a long-term rental, our team of experts is here to help you with the perfect vehicle to suit your needs and budget
-          </p>
-          <button className="mt-6 bg-red-500 text-white px-6 py-3 rounded hover:bg-red-700 transition cursor-pointer">
-            Discover Now
-          </button>
-        </div>
+    <div className="relative h-screen overflow-hidden bg-black">
+      <div className="text-center mt-10 border-b-2 border-white">
+        <motion.h1
+          variants={containerVariants}
+          initial="initial"
+          animate="animate"
+          className="text-[40px] md:text-[100px] font-bold w-[100%] md:w-[60%] mx-auto text-white leading-tight"
+        >
+          <motion.span variants={spanVariants} className="block">Premium Luxury Rides</motion.span>
+          <motion.span variants={spanVariants} className="block">and Executive</motion.span>
+          <motion.span variants={spanVariants} className="block">Protection</motion.span>
+        </motion.h1>
+
+        <p className="text-lg mt-4 text-white">Arrive in Style and Comfort</p>
+        <button className="mt-6 px-6 py-2 bg-black text-white border border-white rounded-full hover:bg-white hover:text-black transition">
+          Explore Now
+        </button>
       </div>
-    </>
-  )
-}
 
-export default Home
+      <div>
+        <img
+          src="https://static.wixstatic.com/media/11062b_df157b31de1b4741a83209d5931f7d92~mv2.jpeg/v1/fill/w_2191,h_812,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_df157b31de1b4741a83209d5931f7d92~mv2.jpeg"
+          alt="Luxury Car"
+          className="w-full h-auto object-cover mt-10"
+        />
+      </div>
+    </div>
+  );
+};
 
+export default Home;

@@ -10,7 +10,7 @@ const ContactUs = () => {
             <input type="text" id="name" name="name" className='border border-gray-300 p-2' required />
             
             <label htmlFor="email">Email:</label>
-            <input type="email" id="email" name="email" className='border border-gray-300 p-2' required />
+            <input type="email"id="email" name="email" className='border border-gray-300 p-2' required />
             
             <label htmlFor="message">Message:</label>
             <textarea id="message" name="message" className='border border-gray-300 p-2' required></textarea>
