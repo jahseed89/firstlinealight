@@ -4,7 +4,6 @@ import { GoSearch } from "react-icons/go";
 import siteLogo from '../../assets/logo.png';
 import { NavLink } from 'react-router-dom';
 import { RiMenu3Line } from "react-icons/ri";
-// import { CiMenuFries } from "react-icons/ci";
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from 'framer-motion';
 import { carOptions } from '../../../utiles';

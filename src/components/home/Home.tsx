@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { motion } from "framer-motion";
 import Fleet from "../fleet/Fleet";
 
@@ -22,7 +22,25 @@ const spanVariants = {
   },
 };
 
+const fadeUp = {
+  initial: { y: 50, opacity: 0 },
+  whileInView: {
+    y: 0,
+    opacity: 1,
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
+  viewport: { once: true, amount: 0.3 }, // triggers once when 30% is visible
+};
+
 const Home = () => {
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  const handleScroll = () => {
+    if (contentRef.current) {
+      contentRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <div className="relative overflow-hidden bg-black">
       <div className="text-center mt-10 border-b-2 border-white pb-4">
@@ -44,7 +62,10 @@ const Home = () => {
         </motion.h1>
 
         <p className="text-lg mt-4 text-white">Arrive in Style and Comfort</p>
-        <button className="mt-6 px-6 py-2 bg-black text-white border border-white rounded-full hover:bg-white hover:text-black transition cursor-pointer">
+        <button
+          className="mt-6 px-6 py-2 bg-black text-white border border-white rounded-full hover:bg-white hover:text-black transition cursor-pointer"
+          onClick={handleScroll}
+        >
           Explore Now
         </button>
       </div>
@@ -56,7 +77,7 @@ const Home = () => {
           className="w-full h-auto object-cover mt-10"
         />
       </div>
-      <div className="lg:w-[60%] mt-10 px-8 lg:pl-10 lg:pr-0">
+      <div className="lg:w-[60%] mt-10 px-8 lg:pl-10 lg:pr-0" ref={contentRef}>
         <h1 className="text-white text-[50px] lg:text-[68px] font-bold">
           Our Fleet
         </h1>
@@ -79,6 +100,34 @@ const Home = () => {
           category="Safety and Security"
           carDescription="  Prioritize your safety and security with our executive protection services. Our dedicated team ensures a discreet and reliable experience, offering peace of mind during your travels, events, or business engagements."
         />
+      </div>
+      <div className="flex justify-between items-start flex-wrap mt-10 px-8 lg:pl-10 lg:pr-0 border-y-2 border-white">
+        <div className="lg:w-[50%]">
+          <div className="lg:w-[50%]">
+            <h1 className="text-[40px] lg:text-[64px] text-white mt-10">
+              About Rent a Car
+            </h1>
+            <motion.p
+              variants={fadeUp}
+              initial="initial"
+              whileInView="whileInView"
+              viewport={fadeUp.viewport}
+              className="ext-[16px] text-white text-justify"
+            >
+              At Rent a Car, we specialize in providing premium luxury rides,
+              private jets, and executive protection exclusively for discerning
+              travelers from around the world. Our commitment to excellence and
+              personalized service ensures a seamless and luxurious travel
+              experience, wherever your journey begins.
+            </motion.p>
+          </div>
+        </div>
+        <div className="lg:w-[50%] border-l-2 border-white">
+          <img
+            src="https://static.wixstatic.com/media/11062b_0a0a412e3de64d3a98618b9ad9fd26a2~mv2.jpg/v1/fill/w_1096,h_652,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_0a0a412e3de64d3a98618b9ad9fd26a2~mv2.jpg"
+            alt=""
+          />
+        </div>
       </div>
     </div>
   );
