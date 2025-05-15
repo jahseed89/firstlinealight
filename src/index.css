@@ -2,7 +2,7 @@
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-   --color_45: rgb(var(--color_45))
+   color: "#e7dfd3";
    
 }
 /* body {

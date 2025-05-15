@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import Fleet from "../fleet/Fleet";
 
@@ -34,12 +34,33 @@ const fadeUp = {
 
 const Home = () => {
   const contentRef = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(false);
+  const videoRef = useRef<HTMLDivElement | null>(null);
 
   const handleScroll = () => {
     if (contentRef.current) {
       contentRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setInView(entry.isIntersecting);
+      },
+      { threshold: 0.5 } // 50% of video section visible
+    );
+
+    if (videoRef.current) {
+      observer.observe(videoRef.current);
+    }
+
+    return () => {
+      if (videoRef.current) {
+        observer.unobserve(videoRef.current);
+      }
+    };
+  }, []);
 
   return (
     <div className="relative overflow-hidden bg-black">
@@ -60,7 +81,6 @@ const Home = () => {
             Protection
           </motion.span>
         </motion.h1>
-
         <p className="text-lg mt-4 text-white">Arrive in Style and Comfort</p>
         <button
           className="mt-6 px-6 py-2 bg-black text-white border border-white rounded-full hover:bg-white hover:text-black transition cursor-pointer"
@@ -69,7 +89,6 @@ const Home = () => {
           Explore Now
         </button>
       </div>
-
       <div>
         <img
           src="https://static.wixstatic.com/media/11062b_df157b31de1b4741a83209d5931f7d92~mv2.jpeg/v1/fill/w_2191,h_812,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_df157b31de1b4741a83209d5931f7d92~mv2.jpeg"
@@ -127,6 +146,69 @@ const Home = () => {
             src="https://static.wixstatic.com/media/11062b_0a0a412e3de64d3a98618b9ad9fd26a2~mv2.jpg/v1/fill/w_1096,h_652,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_0a0a412e3de64d3a98618b9ad9fd26a2~mv2.jpg"
             alt=""
           />
+        </div>
+      </div>
+      <div>
+        <h1 className="text-white text-[40px] lg:text-[64px] font-bold text-center py-10">
+          Latest Additions
+        </h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4 lg:px-16 pb-20">
+          {[
+            {
+              img: "https://static.wixstatic.com/media/11062b_ddfdcd25558b44a6944fda30067181c6~mv2.jpg/v1/fill/w_302,h_422,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/0-01.jpg",
+              title: "New Offerings",
+              text: `Discover our latest offerings, designed to elevate your travel experience. From exclusive luxury cars to bespoke private jet services, we continue to redefine premium travel with uncompromising quality and sophistication.`,
+            },
+            {
+              img: "https://static.wixstatic.com/media/11062b_465533d7f61747529c1ac6fc7c35c34b~mv2.jpg/v1/crop/x_35,y_0,w_2688,h_3744/fill/w_302,h_422,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/0-02.jpg",
+              title: "Events & Experiences",
+              text: `Join us at prestigious events and exclusive experiences tailored for our distinguished clientele. Immerse yourself in the world of luxury travel and explore the finest in transportation, hospitality, and lifestyle.`,
+            },
+            {
+              img: "https://static.wixstatic.com/media/11062b_77ee69ae2f3744b9b0c5f7019982f846~mv2.jpg/v1/fill/w_302,h_422,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/0-03.jpg",
+              title: "Recognition & Awards",
+              text: `We take pride in our industry recognition and prestigious awards, celebrating our commitment to delivering exceptional services and experiences to our esteemed customers.`,
+            },
+          ].map(({ img, title, text }, i) => (
+            <div
+              key={i}
+              className="text-white border border-white pt-6 pb-8 px-4 flex flex-col items-center text-center"
+            >
+              <img
+                src={img}
+                alt={title}
+                className="border-2 border-white mb-6 w-full max-w-[300px]"
+              />
+              <h2 className="text-[22px] lg:text-[26px] font-bold mb-4">
+                {title}
+              </h2>
+              <motion.p
+                variants={fadeUp}
+                initial="initial"
+                whileInView="whileInView"
+                viewport={fadeUp.viewport}
+                className="text-[16px] text-justify text-white max-w-[300px]"
+              >
+                {text}
+              </motion.p>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="">
+        {/* <iframe
+          className="w-full h-[500px]"
+          src="https://drive.google.com/file/d/1qSpkiihJuEsEU4bu_SZL9MgiqL8_hjEg/preview"
+          allow="autoplay"
+        ></iframe> */}
+        <div ref={videoRef} className="w-full h-[500px]">
+          {inView && (
+            <iframe
+              className="w-full h-full"
+              src="https://drive.google.com/file/d/1qSpkiihJuEsEU4bu_SZL9MgiqL8_hjEg/preview"
+              allow="autoplay"
+            />
+          )}
         </div>
       </div>
     </div>
