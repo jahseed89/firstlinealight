@@ -34,33 +34,12 @@ const fadeUp = {
 
 const Home = () => {
   const contentRef = useRef<HTMLDivElement>(null);
-  const [inView, setInView] = useState(false);
-  const videoRef = useRef<HTMLDivElement | null>(null);
 
   const handleScroll = () => {
     if (contentRef.current) {
       contentRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setInView(entry.isIntersecting);
-      },
-      { threshold: 0.5 } // 50% of video section visible
-    );
-
-    if (videoRef.current) {
-      observer.observe(videoRef.current);
-    }
-
-    return () => {
-      if (videoRef.current) {
-        observer.unobserve(videoRef.current);
-      }
-    };
-  }, []);
 
   return (
     <div className="relative overflow-hidden bg-black">
@@ -195,16 +174,12 @@ const Home = () => {
           ))}
         </div>
       </div>
-      <div>
-        <video
-          className="absolute top-0 left-0 w-full h-full object-cover opacity-30 z-0"
-          src="https://player.vimeo.com/external/341068168.sd.mp4?s=8f01e3f7d1784f90a71d3e2188654a3cd1d38ea5&profile_id=164&oauth2_token_id=57447761"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-        />
+      <div className="relative w-full h-[500px] overflow-hidden mt-10">
+        <iframe
+          className="w-full h-[500px]"
+          src="https://drive.google.com/file/d/1qSpkiihJuEsEU4bu_SZL9MgiqL8_hjEg/preview"
+          allow="autoplay"
+        ></iframe>
       </div>
     </div>
   );
